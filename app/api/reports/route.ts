@@ -32,10 +32,10 @@ export async function GET(request: NextRequest) {
   const startDate = searchParams.get('start')
   const endDate = searchParams.get('end')
 
-  let start = startDate ?? format(startOfMonth(new Date()), 'yyyy-MM-dd')
-  let end = endDate ?? format(endOfMonth(new Date()), 'yyyy-MM-dd')
+  const start = startDate ?? format(startOfMonth(new Date()), 'yyyy-MM-dd')
+  const end = endDate ?? format(endOfMonth(new Date()), 'yyyy-MM-dd')
 
-  const [habitsRes, entriesRes, timeEntriesRes, categoriesRes, antiHabitsRes, antiEntriesRes, goalsRes, settingsRes] =
+  const [habitsRes, entriesRes, timeEntriesRes, categoriesRes, _antiHabitsRes, antiEntriesRes, goalsRes, settingsRes] =
     await Promise.all([
       supabase.from('habits').select('*'),
       supabase.from('habit_entries').select('*').gte('date', start).lte('date', end),
